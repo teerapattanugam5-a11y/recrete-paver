@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECRETE PAVER | กระเบื้องคอนกรีตรีไซเคิล 30×30×5 ซม.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d5a27;
+            --primary-dark: #1e3f1a;
+            --accent: #8bc34a;
+            --bg: #f0f4ec;
+            --text: #2c3e50;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background: var(--primary-dark);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before { content: "🌿"; font-size: 1.8rem; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover { opacity: 0.8; }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #a8d5a2 0%, #7fb069 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover { background: var(--primary); transform: translateY(-2px); }
+        .btn.accent { background: var(--accent); color: var(--primary-dark); }
+        .btn.accent:hover { background: #7cb342; }
+
+        /* Section */
+        section { padding: 4rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-dark);
+        }
+
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+
+        /* Products */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .product-card:hover { transform: translateY(-5px); }
+
+        .product-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-info h3 { margin-bottom: 0.5rem; color: var(--primary-dark); font-size: 1.5rem; }
+        .product-info p { font-size: 1rem; color: #666; margin-bottom: 1rem; }
+        .price { font-weight: 700; color: var(--primary); font-size: 1.3rem; display: block; margin-bottom: 1rem; }
+
+        /* ===== CALCULATOR TABS ===== */
+        .calculator-tabs {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            background: rgba(45, 90, 39, 0.05);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .calc-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            align-items: end;
+        }
+
+        .calc-group { text-align: left; }
+        .calc-group.full { grid-column: 1 / -1; }
+
+        .calc-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .calc-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1rem;
+        }
+
+        .calc-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .tile-info {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .result-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(45, 90, 39, 0.05);
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .result-box span { color: var(--primary); font-weight: 700; }
+
+        /* ===== PATTERN CARDS ===== */
+        .pattern-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pattern-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--white);
+            position: relative;
+        }
+
+        .pattern-card:hover {
+            border-color: var(--primary);
+            background: rgba(45, 90, 39, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .pattern-card input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .pattern-card input:checked ~ .pattern-preview {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.2);
+        }
+
+        .pattern-card input:checked ~ .pattern-name {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .pattern-card input:checked ~ .pattern-card-border {
+            border-color: var(--primary);
+        }
+
+        .pattern-preview {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+            background: #f8faf8;
+        }
+
+        .pattern-preview svg {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .pattern-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text);
+        }
+
+        .pattern-desc {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Contact Form */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content { max-width: 1100px; margin: 0 auto; }
+        .social { margin: 1rem 0; }
+        .social a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        .social a:hover { color: var(--accent); }
+
+        /* Alert */
+        #alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: none;
+            box-shadow: var(--shadow);
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">RECRETE PAVER</div>
+        <ul class="nav-links">
+            <li><a href="#home">หน้าแรก</a></li>
+            <li><a href="#products">ผลิตภัณฑ์</a></li>
+            <li><a href="#calculator">คำนวณค่าใช้จ่าย</a></li>
+            <li><a href="#contact">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>RECRETE PAVER</h1>
+        <p>กระเบื้องคอนกรีตรีไซเคิล ขนาด 30×30×5 ซม. พร้อมผิวกันลื่น สำหรับทางเท้าและพื้นที่สาธารณะเชิงพาณิชย์</p>
+        <a href="#products" class="btn">ดูผลิตภัณฑ์</a>
+        <a href="#calculator" class="btn accent">คำนวณจำนวนแผ่น</a>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h2 class="section-title">ทำไมต้อง RECRETE PAVER?</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                        เรานำเศษคอนกรีตจากงานรื้อถอนและก่อสร้างมาบดและผสมใหม่กับซีเมนต์ ผลิตเป็นกระเบื้องปูพื้นขนาด <strong>30×30×5 ซม.</strong> แข็งแรงทนทาน และมี <strong>ผิวกันลื่น</strong> ปลอดภัยสำหรับผู้ใช้ทางเท้าในทุกสภาพอากาศ
+                    </p>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✅ ลดขยะคอนกรีตจากการก่อสร้าง</li>
+                        <li>✅ ลดการใช้ทรัพยากรปูนซีเมนต์ใหม่</li>
+                        <li>✅ ผิวกันลื่น ได้มาตรฐานความปลอดภัย</li>
+                        <li>✅ ขนาดมาตรฐาน 30×30×5 ซม. ปูง่าย ติดตั้งไว</li>
+                    </ul>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <img src="paver-product.jpg" alt="RECRETE PAVER 30x30x5 cm" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: var(--shadow);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container">
+            <h2 class="section-title">ผลิตภัณฑ์ของเรา</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="paver-product.jpg" alt="RECRETE PAVER 30×30×5 cm" class="product-img">
+                    <div class="product-info">
+                        <h3>RECRETE PAVER 30×30×5 ซม.</h3>
+                        <p>กระเบื้องคอนกรีตรีไซเคิลแบบมาตรฐาน ผิวขรุขระกันลื่น ขนาด 30×30 ซม. หนา 5 ซม. เหมาะสำหรับทางเท้า สวนสาธารณะ และพื้นที่เชิงพาณิชย์</p>
+                        <span class="price">35 บาท / แผ่น</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator">
+        <div class="container">
+            <h2 class="section-title">เครื่องคำนวณจำนวนแผ่น</h2>
+            <div class="calculator-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-area')">คำนวณจากพื้นที่ปู</button>
+                </div>
+
+                <div id="tab-area" class="tab-content active">
+                    <div class="calc-form">
+                        <div class="calc-group">
+                            <label>ความกว้างพื้นที่ (เมตร)</label>
+                            <input type="number" id="areaWidth" step="0.1" placeholder="เช่น 5.0">
+                        </div>
+                        <div class="calc-group">
+                            <label>ความยาวพื้นที่ (เมตร)</label>
+                            <input type="number" id="areaLength" step="0.1" placeholder="เช่น 10.0">
+                        </div>
+                        <div class="tile-info">📐 ขนาดกระเบื้อง: 30×30 ซม. (= 0.09 ตร.ม./แผ่น)</div>
+                        
+                        <div class="calc-group full">
+                            <label>แพทเทิร์นการปู</label>
+                            <div class="pattern-options">
+                                <!-- Stack Bond -->
+                                <label class="pattern-card">
+                                    <input type="radio" name="pattern" value="0.05" checked>
+                                    <div class="pattern-preview">
+                                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="10" y="10" width="30" height="30" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="50" y="10" width="30" height="30" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="10" y="50" width="30" height="30" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="50" y="50" width="30" height="30" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+                                    <div class="pattern-name">Stack Bond</div>
+                                    <div class="pattern-desc">ปูตรงซ้อนทับ • เศษ 5%</div>
+                                </label>
+
+                                <!-- Running Bond -->
+                                <label class="pattern-card">
+                                    <input type="radio" name="pattern" value="0.10">
+                                    <div class="pattern-preview">
+                                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="10" y="10" width="35" height="25" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="55" y="10" width="35" height="25" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="27" y="45" width="35" height="25" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="10" y="80" width="35" height="25" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="55" y="80" width="35" height="25" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+                                    <div class="pattern-name">Running Bond</div>
+                                    <div class="pattern-desc">ปูอิฐสลับ • เศษ 10%</div>
+                                </label>
+
+                                <!-- Herringbone -->
+                                <label class="pattern-card">
+                                    <input type="radio" name="pattern" value="0.15">
+                                    <div class="pattern-preview">
+                                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="20" y="25" width="15" height="35" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2" transform="rotate(45 27.5 42.5)"/>
+                                            <rect x="55" y="25" width="15" height="35" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2" transform="rotate(45 62.5 42.5)"/>
+                                            <rect x="20" y="65" width="15" height="35" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2" transform="rotate(45 27.5 82.5)"/>
+                                            <rect x="55" y="65" width="15" height="35" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2" transform="rotate(45 62.5 82.5)"/>
+                                            <rect x="70" y="45" width="15" height="35" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2" transform="rotate(-45 77.5 62.5)"/>
+                                        </svg>
+                                    </div>
+                                    <div class="pattern-name">Herringbone</div>
+                                    <div class="pattern-desc">ก้างปลา • เศษ 15%</div>
+                                </label>
+
+                                <!-- Basketweave -->
+                                <label class="pattern-card">
+                                    <input type="radio" name="pattern" value="0.12">
+                                    <div class="pattern-preview">
+                                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="10" y="10" width="40" height="20" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="60" y="10" width="20" height="40" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="10" y="40" width="20" height="40" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="40" y="60" width="40" height="20" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                            <rect x="80" y="30" width="20" height="20" fill="#e8f5e9" stroke="#2d5a27" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+                                    <div class="pattern-name">Basketweave</div>
+                                    <div class="pattern-desc">ถักทอ • เศษ 12%</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="calc-group full" style="grid-column: 1 / -1; text-align: center;">
+                            <button class="btn accent" onclick="calculateArea()" style="padding: 1rem 2rem; font-size: 1.1rem;">คำนวณจำนวนแผ่น</button>
+                        </div>
+                    </div>
+                    <div class="result-box" id="areaResult">
+                        <div style="color:#666;">กรอกขนาดพื้นที่ เลือกแพทเทิร์น แล้วกดคำนวณเพื่อดูผลลัพธ์</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">ติดต่อเรา</h2>
+            <div class="contact-grid">
+                <div>
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-dark);">ส่งข้อมูลโครงการของคุณ</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label>ชื่อ-นามสกุล</label>
+                            <input type="text" required placeholder="นายทดสอบ รักสิ่งแวดล้อม">
+                        </div>
+                        <div class="form-group">
+                            <label>เบอร์โทรศัพท์</label>
+                            <input type="tel" required placeholder="เช่น 0812345678">
+                        </div>
+                        <div class="form-group">
+                            <label>อีเมล</label>
+                            <input type="email" required placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>จำนวนที่สนใจ (แผ่น)</label>
+                            <input type="number" required placeholder="เช่น 500">
+                        </div>
+                        <div class="form-group">
+                            <label>ประเภทพื้นที่</label>
+                            <select required>
+                                <option value="">-- เลือกประเภท --</option>
+                                <option value="sidewalk">ทางเท้าสาธารณะ</option>
+                                <option value="park">สวนสาธารณะ</option>
+                                <option value="commercial">พื้นที่เชิงพาณิชย์</option>
+                                <option value="other">อื่นๆ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>ข้อความเพิ่มเติม</label>
+                            <textarea rows="4" placeholder="บอกเล่ารายละเอียดโครงการของคุณ"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">ส่งข้อมูล</button>
+                    </form>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <img src="paver-product.jpg" alt="RECRETE PAVER" style="max-width: 100%; height: auto; border-radius: 12px;">
+                    <p style="margin-top: 2rem; font-size: 1.1rem;">ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="justify-content: center; margin-bottom: 1rem;">RECRETE PAVER</div>
+            <p>คอนกรีตหมุนเวียน • ปลอดภัย • ใส่ใจสิ่งแวดล้อม</p>
+            <div class="social">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Line</a>
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">© 2026 RECRETE PAVER - โครงงานนักศึกษา</p>
+        </div>
+    </footer>
+
+    <div id="alert">ส่งข้อมูลเรียบร้อยแล้ว ขอบคุณที่สนใจ RECRETE PAVER!</div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function calculateArea() {
+            const width = parseFloat(document.getElementById('areaWidth').value);
+            const length = parseFloat(document.getElementById('areaLength').value);
+            const selectedPattern = document.querySelector('input[name="pattern"]:checked');
+            const wasteFactor = selectedPattern ? parseFloat(selectedPattern.value) : 0.05;
+
+            if (!width || !length) {
+                alert("กรุณากรอกความกว้างและความยาวของพื้นที่");
+                return;
+            }
+
+            const tileArea = 0.09; // 30×30 ซม. = 0.09 ตร.ม.
+            const totalArea = width * length;
+            const rawTiles = totalArea / tileArea;
+            const withWaste = rawTiles * (1 + wasteFactor);
+            const tilesNeeded = Math.ceil(withWaste);
+            const actualCovered = tilesNeeded * tileArea;
+            const wasteArea = actualCovered - totalArea;
+            const pricePerTile = 35; // ราคา 35 บาทต่อแผ่น
+            const estimatedCost = tilesNeeded * pricePerTile;
+
+            const result = document.getElementById('areaResult');
+            result.innerHTML = `
+                <div style="margin-bottom: 0.8rem;"><strong>📐 พื้นที่รวม:</strong> ${totalArea.toFixed(2)} ตร.ม.</div>
+                <div style="margin-bottom: 0.8rem;"><strong>🧱 จำนวนแผ่นที่ต้องการ:</strong> <span style="font-size: 1.5rem; color: var(--primary);">${tilesNeeded.toLocaleString()}</span> แผ่น</div>
+                <div style="margin-bottom: 0.8rem;"><strong>📏 พื้นที่ที่ครอบคลุมจริง:</strong> ${actualCovered.toFixed(2)} ตร.ม.</div>
+                <div style="margin-bottom: 0.8rem;"><strong>♻️ เศษวัสดุที่คาดว่าจะเหลือ:</strong> ${wasteArea.toFixed(2)} ตร.ม. (ประมาณ ${Math.round(wasteFactor * 100)}%)</div>
+                <div><strong>💰 ราคาประมาณ:</strong> ${estimatedCost.toLocaleString()} บาท (คิดที่แผ่นละ 35 บาท)</div>
+            `;
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const alertBox = document.getElementById('alert');
+            alertBox.style.display = 'block';
+            setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
